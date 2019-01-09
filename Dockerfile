@@ -31,13 +31,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && pip3 install -r requirements.txt \
 
 # remove package
-  && apt-get remove -y --auto-remove g++ g++-6 gcc gcc-6 gcc-6-base:amd64 make git git-man python3-pip curl wget \
+  && apt-get remove -y make git git-man python3-pip \
 
 # clean cache
-  && apt-get autoremove \
-  && apt-get clean \
-  && apt-get autoclean \
-  && cat /dev/null > /var/log/apt \
+  && apt-get clean autoclean \
+  && apt-get autoremove --yes \
   && cat /dev/null > /var/log/btmp \
   && cat /dev/null > /var/log/debug \
   && cat /dev/null > /var/log/faillog \
@@ -50,10 +48,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /usr/share/doc/* /usr/share/man/* /usr/share/info/* \
   && rm -rf /var/cache/apt/archives/* \
   && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /var/log/apt* \
   && rm -rf /var/log/installer* \
-  && rm -rf /var/tmp/systemd-private* \
-  && set -o pipefail && find /var | grep '\.log$' | xargs rm -v \
-  && history -c && history -w
+  && rm -rf /var/log/*.log \
+  && rm -rf /var/tmp/systemd-private*
 
 VOLUME ${WWW_DIR}
 

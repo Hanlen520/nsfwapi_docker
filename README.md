@@ -23,7 +23,11 @@ curl -d 'url=image.png' localhost:8080
 
 #### docker
 ```shell
-#TODO
+#创建镜像
+sudo docker build -t open_nsfw .
+
+#运行
+sudo docker run -d --name=nsfwserver --restart=always -v /var/www:/var/www -p 8086:8080 open_nsfw
 ```
 
 
