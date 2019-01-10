@@ -11,10 +11,15 @@ RUN mkdir -p ${NSFW_DIR} ${WWW_DIR} \
   && chmod -R a+rw ${WWW_DIR} \
   && useradd -M -s /sbin/nologin ${WWW_USER}
 
-# install tools
+# update source
 WORKDIR ${NSFW_DIR}
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib\ndeb http://mirrors.163.com/debian/ stretch-updates main non-free contrib\ndeb http://mirrors.163.com/debian/ stretch-backports main non-free contrib\ndeb-src http://mirrors.163.com/debian/ stretch main non-free contrib\ndeb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib\ndeb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib\ndeb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib\ndeb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" > /etc/apt/sources.list \
+
+# install package
+  && apt-get update \
+  && apt-get install -y --no-install-recommends \
     build-essential \
+    libssl-dev \
     caffe-cpu \
     git \
     python3 \
