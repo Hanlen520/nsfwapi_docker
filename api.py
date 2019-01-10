@@ -10,6 +10,7 @@ import asyncio
 import numpy as np
 import uvloop
 import os.path
+import ssl
 
 nsfw_net, caffe_transformer = loadNsfwModel()
 
@@ -18,8 +19,9 @@ def classify(image) -> np.float64:
     return scores[1]
 
 async def fetch(session, url):
+    sslcontext = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     with async_timeout.timeout(10):
-        async with session.get(url) as response:
+        async with session.get(url, ssl=sslcontext) as response:
             if response.status == 404:
                 raise HTTPNotFound(text="url`s image not found")
             return await response.read()
