@@ -43,3 +43,6 @@ sudo docker run -d --name=nsfwserver --restart=always -v /var/www:/var/www -p 80
 - **415 Unsupported Media Type**  
 包括：  
     - url is invalid image,无效的图片类型
+- **500 Internal Server Error**  
+包括：
+    - Server got itself in trouble,服务内部错误
