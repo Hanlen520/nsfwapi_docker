@@ -24,9 +24,9 @@ RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib\ndeb 
     git \
     python3 \
     python3-dev \
-    python3-numpy \
     python3-pip \
     python3-setuptools \
+    python3-numpy \
     python3-wheel \
 
 # clone repertory
@@ -36,7 +36,7 @@ RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib\ndeb 
   && pip3 install -r requirements.txt \
 
 # remove package
-  && apt-get remove -y make git git-man python3-pip \
+  && apt-get remove -y make cpp cpp-6 g++ g++-6 gcc gcc-6 git git-man gnome-icon-theme python3-pip python3-setuptools \
 
 # clean cache
   && apt-get clean autoclean \

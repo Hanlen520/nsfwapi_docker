@@ -37,19 +37,18 @@ class API(web.View):
         imgdir = '/var/www/'
         try:
             image = data["url"]
-            #print('url', image)
             if image.strip()=="":
                 return HTTPBadRequest(text="url can not be empty")
             elif isUrl(image):
                 image = await fetch(session, image)
             else:
-                #image = os.path.abspath(image)
-                image = os.path.abspath(imgdir+image.lstrip('/'))
+                image = image if(image.startswith('/')) else os.path.abspath(imgdir+image)
                 if not isReadableFile(image):
                     raise HTTPNotFound(text="url`s image not exist")
 
             nsfw_prob = classify(image)
             text = nsfw_prob.astype(str)
+            del(data, imgdir, image, nsfw_prob)
             return web.Response(text=text)
         except KeyError:
             return HTTPBadRequest(text="Missing `url` parameter")

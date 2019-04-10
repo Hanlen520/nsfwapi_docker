@@ -18,7 +18,10 @@ python3 api.py
 curl -d 'url=http://example.com/image.jpg' localhost:8080
 
 #curl请求-本地图片(图片目录/var/www)
+#使用相对路径
 curl -d 'url=image.png' localhost:8080
+#使用绝对路径
+curl -d 'url=/var/www/image.png' localhost:8080
 ```
 
 #### docker
@@ -27,7 +30,7 @@ curl -d 'url=image.png' localhost:8080
 sudo docker build -t nsfwapi .
 
 #运行
-sudo docker run -d --name=nsfwserver --restart=always -v /var/www:/var/www -p 8086:8080 nsfwapi
+sudo docker run -d --name=nsfwserver --restart=always -v /var/www:/var/www -p 8080:8080 nsfwapi
 ```
 
 
