@@ -50,13 +50,17 @@ RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib\ndeb 
   && cat /dev/null > /var/log/wtmp \
   && rm -rf /run/log/journal/* \
   && rm -rf /tmp/systemd-private-* \
+  && rm -rf /tmp/*.cache \
   && rm -rf /usr/share/doc/* /usr/share/man/* /usr/share/info/* \
+  && rm -rf /var/backups/* \
   && rm -rf /var/cache/apt/archives/* \
+  && rm -rf /var/cache/debconf/* \
   && rm -rf /var/lib/apt/lists/* \
   && rm -rf /var/log/apt* \
   && rm -rf /var/log/installer* \
   && rm -rf /var/log/*.log \
-  && rm -rf /var/tmp/systemd-private*
+  && rm -rf /var/tmp/systemd-private* \
+  && history -c && history -w
 
 VOLUME ${WWW_DIR}
 
