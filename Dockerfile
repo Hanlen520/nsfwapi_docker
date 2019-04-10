@@ -59,8 +59,7 @@ RUN echo "deb http://mirrors.163.com/debian/ stretch main non-free contrib\ndeb 
   && rm -rf /var/log/apt* \
   && rm -rf /var/log/installer* \
   && rm -rf /var/log/*.log \
-  && rm -rf /var/tmp/systemd-private* \
-  && history -c && history -w
+  && rm -rf /var/tmp/systemd-private*
 
 VOLUME ${WWW_DIR}
 
